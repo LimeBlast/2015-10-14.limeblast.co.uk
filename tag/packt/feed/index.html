@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Lime Blast &#187; Packt</title>
+	<atom:link href="http://limeblast.co.uk/tag/packt/feed/" rel="self" type="application/rss+xml" />
+	<link>http://limeblast.co.uk</link>
+	<description>The virtual home of Web developer Daniel Hollands, the place to be if you&#039;re looking for articles and tutorials (and rants) on all aspects of the World Wide Web.</description>
+	<lastBuildDate>Wed, 14 Oct 2015 13:13:21 +0000</lastBuildDate>
+	<language>en-US</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.9</generator>
+	<item>
+		<title>Laravel Application Development Cookbook</title>
+		<link>http://limeblast.co.uk/2014/01/laravel-application-development-cookbook/</link>
+		<comments>http://limeblast.co.uk/2014/01/laravel-application-development-cookbook/#comments</comments>
+		<pubDate>Mon, 13 Jan 2014 20:00:21 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Reviews]]></category>
+		<category><![CDATA[CakePHP]]></category>
+		<category><![CDATA[Composer]]></category>
+		<category><![CDATA[Jeffrey Way]]></category>
+		<category><![CDATA[Laracasts]]></category>
+		<category><![CDATA[Laravel]]></category>
+		<category><![CDATA[Packt]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[PuPHPet]]></category>
+		<category><![CDATA[Vagrant]]></category>
+		<category><![CDATA[wampserver]]></category>
+		<category><![CDATA[Yii]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=1152</guid>
+		<description><![CDATA[Introduction At the tail end of October last year I saw a post on LinkedIn by Packt asking if anyone would like a free copy of their recently published Laravel Application Development Cookbook by Terry Matula. Being the greedy so-and-so...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2013/07/useful-composer-packages-for-use-with-laravel-4/' rel='bookmark' title='Useful Composer packages for use with Laravel 4'>Useful Composer packages for use with Laravel 4</a>By this time next week, I would have (hopefully) survived my first day at my new job, and gone back for more. My new job requires that I learn Yii, which I have been doing, and for the most part......</li>
+<li><a href='http://limeblast.co.uk/2012/11/web-developer-economics-one-off-software-costs/' rel='bookmark' title='Web Developer Economics: One Off Software Costs'>Web Developer Economics: One Off Software Costs</a>Taking inspiration from a post by Chris Coyer on Web Developer Economics, specifically that of One Off Software Costs I&#8217;ve decided to put together my own list of figures. Unlike Chris however, who had a start up cost of $1,779.98, I......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<a name="introduction"></a><h2>Introduction</h2>
+<p>At the tail end of October last year I saw a post on LinkedIn by Packt asking if anyone would like a free copy of their recently published <a href="http://www.packtpub.com/laravel-application-development-cookbook/book">Laravel Application Development Cookbook</a> by Terry Matula. Being the greedy so-and-so that I am, I jumped at the chance to get something for free &#8211; the fact it was a book about Laravel, a framework which is currently in the centre of my latest project, made it all the sweeter. Of course, there is no such thing as a free lunch, and in exchange for the aforementioned free copy of the book, I had to write a review of it, which is what you’re reading right now.</p>
+<p>I should mention at this point that I&#8217;ve only read the first three chapters, so there might be a second or even third part to this review published at some point in the future, but I feel that I&#8217;ve read enough (and seen enough warning signs in the way that the book is written) to give my opinion on what I have read thus far.</p>
+<a name="laravel"></a><h2>Laravel</h2>
+<p><a href="http://laravel.com/">Laravel</a>, for anyone that doesn&#8217;t know, is a PHP framework developed by <a href="http://taylorotwell.com/">Taylor Otwell</a> and popularized by <span class="removed_link" title="http://jeffrey-way.com/">Jeffrey Way</span> (at least, it&#8217;s because of Jeffrey Way that I know about it). Taking advantage of the latest features available in PHP&#8217;s arsenal, not least of which being <a href="http://getcomposer.org/">Composer</a>, a dependency manager which takes the hard work out of using third-party classes, Laravel is at the cutting edge of what PHP can do.</p>
+<p>One of the things that I like about Laravel is that anyone with experience writing PHP can pick it up and use it with ease. That’s not to say there isn&#8217;t anything to learn about the framework (there is a hell of a lot), rather, whereas Frameworks like CakePHP and Yii have their own, propriety and overly complicated ways of going about thing such as using modules/addons/packages/classes, the PSR standards which Laravel adopts (thanks, in part, to Composer) are super simple. Combine that with a whole host of cool ideas and features, and you&#8217;ve got yourself a fantastic little framework.</p>
+<a name="the-book"></a><h2>The Book</h2>
+<p>Unfortunately, while I would love to sing this book’s praises, I found too many examples of sloppy code and poor explanation within the first three chapters to do this.</p>
+<p>An example of this, early in the first chapter, is the task titled “Installing Laravel as a git submodule”. While I can’t fault the method presented within the book for achieving this, I&#8217;m a little confused as to why this task even exists, as frankly, it’s just a bad idea. The Laravel framework itself is a Composer package, and is both installed and autoloaded via it, so to ignore this system in favour of a git-based one, which would make updating it much more of a chore, just doesn&#8217;t make sense. If this book was for a framework like Yii, then it would be a perfect fit, and I’d be applauding it for including it, but here, it just leaves me with the impression that the author doesn&#8217;t understand Laravel.</p>
+<p>The next task, designed to help you set-up a working server environment, is no better. Here the author knows that PHP has a built-in server, but rather than teach you how to use it, instead focuses on setting up a full stack environment. OK, so I don’t really have a problem with this in itself, but I do have a problem with the approach he takes, specifically that of recommending <a href="http://www.wampserver.com/en/">wampserver</a>. For what it’s worth, as a Windows user, I like wampserver, and have been known to use it from time to time. The problem with wampserver is that it only works on Windows, and the author fails to provide Mac or Linux users with any useful information on how to do the same on their respective platforms.</p>
+<p>The other problem I have with this approach is that a better alternative exists, that of <a href="http://www.vagrantup.com/">Vagrant</a>, a cross-platform solution that makes it easy to create virtual machines running whatever server software you need. You don’t even need to worry about learning how to configure Vagrant or the virtual machines it hosts, as tools such as <a href="https://puphpet.com/">puphpet</a>, or pre-configured systems like <a href="https://github.com/bryannielsen/Laravel4-Vagrant">Laravel4-Vagrant</a> make it easy.</p>
+<p>The next few tasks and following chapter were better, with some useful information, although none of it was ground-breaking, and most of it I already knew from other sources. I was disappointed that none of the examples I&#8217;ve read so far included anything about Blade (Laravel’s template system), although this could have been to try and keep examples simple (not that Blade is complicated).</p>
+<a name="conclusion"></a><h2>Conclusion</h2>
+<p>Now maybe I&#8217;m being unfair in this, seeing as I have only read about a quarter of the book, but based on what I have read, I&#8217;m not filled with confidence in the quality of what lies ahead, (this is partly why I have only read three chapters). It is for this reason which I&#8217;m finding it difficult to recommend this book. I do plan on finishing it, as it will no doubt have some useful information, and parts two and three of this review (if they ever get written) might contradict this opinion, but until that happens, I&#8217;d say borrow the book from a friend rather than pay for it yourself.</p>
+<p>In the meantime, if you&#8217;re looking for a good way of learning Laravel, you can&#8217;t go wrong with <a href="https://laracasts.com/">Laracasts</a>.</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2013/07/useful-composer-packages-for-use-with-laravel-4/' rel='bookmark' title='Useful Composer packages for use with Laravel 4'>Useful Composer packages for use with Laravel 4</a><br />By this time next week, I would have (hopefully) survived my first day at my new job, and gone back for more. My new job requires that I learn Yii, which I have been doing, and for the most part......</li>
+<li><a href='http://limeblast.co.uk/2012/11/web-developer-economics-one-off-software-costs/' rel='bookmark' title='Web Developer Economics: One Off Software Costs'>Web Developer Economics: One Off Software Costs</a><br />Taking inspiration from a post by Chris Coyer on Web Developer Economics, specifically that of One Off Software Costs I&#8217;ve decided to put together my own list of figures. Unlike Chris however, who had a start up cost of $1,779.98, I......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2014/01/laravel-application-development-cookbook/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching 6/18 queries in 0.014 seconds using disk
+Object Caching 506/507 objects using disk
+
+ Served from: limeblast.co.uk @ 2015-10-14 15:31:47 by W3 Total Cache -->

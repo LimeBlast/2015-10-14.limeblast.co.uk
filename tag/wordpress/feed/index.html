@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Lime Blast &#187; WordPress</title>
+	<atom:link href="http://limeblast.co.uk/tag/wordpress/feed/" rel="self" type="application/rss+xml" />
+	<link>http://limeblast.co.uk</link>
+	<description>The virtual home of Web developer Daniel Hollands, the place to be if you&#039;re looking for articles and tutorials (and rants) on all aspects of the World Wide Web.</description>
+	<lastBuildDate>Wed, 14 Oct 2015 13:13:21 +0000</lastBuildDate>
+	<language>en-US</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.9</generator>
+	<item>
+		<title>How to use Couch CMS with Git</title>
+		<link>http://limeblast.co.uk/2012/07/how-to-use-couch-cms-with-git/</link>
+		<comments>http://limeblast.co.uk/2012/07/how-to-use-couch-cms-with-git/#comments</comments>
+		<pubDate>Tue, 31 Jul 2012 20:48:46 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Share the knowledge]]></category>
+		<category><![CDATA[CouchCMS]]></category>
+		<category><![CDATA[Git]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=553</guid>
+		<description><![CDATA[After around a year of using WordPress for the majority of the websites I built for Ghost, I was looking for something different. That isn&#8217;t to say that WordPress is bad &#8211; it isn&#8217;t &#8211; it&#8217;s just that for some...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/04/css-crush/' rel='bookmark' title='CSS Crush'>CSS Crush</a>Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much......</li>
+<li><a href='http://limeblast.co.uk/2012/04/deploying-a-git-repository-via-ftp/' rel='bookmark' title='Deploying a Git repository via FTP'>Deploying a Git repository via FTP</a>As any regular reader of this blog will know&#8230; *watches as tumble-weed bounces across the void* &#8230;one of the main reasons I got a dedicated server was because of Git, and all the wonderful things that it is able to do for......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>After around a year of using WordPress for the majority of the websites I built for Ghost, I was looking for something different.</p>
+<p>That isn&#8217;t to say that WordPress is bad &#8211; it isn&#8217;t &#8211; it&#8217;s just that for some of the projects I was working on, using WordPress was a bit like cracking a walnut with a sledgehammer.</p>
+<p>Add to this the fact that the majority of our clients were having trouble understanding the WordPress administration interface (meaning that, more often than not, I ended up populating the content for them), I was looking for something better suited to the type of project I was working on.</p>
+<h3>Enter CouchCMS</h3>
+<p><a href="http://www.couchcms.com/"><img class="alignright size-full wp-image-567" title="CouchCMS" src="http://limeblast.co.uk/wp-content/uploads/2012/07/logo.png" alt="" width="164" height="46" />CouchCMS</a> is a lightweight content management system that is designed to work with pretty much any HTML template you wish to throw at it.</p>
+<p>Unlike a lot of other CMSs I&#8217;ve used, which require that you convert your template into a <em>theme</em> (which, depending on the CMS at hand, can be hard work, not to meantion downright confusing for a beginner), Couch instead gets you to define the editable regions of your template via the addition of some special tags added to your existing markup, which it then uses to build the administration area of the site to your requirements.</p>
+<p>But this post isn&#8217;t designed as a review of Couch (although if it was, it would probably say something like &#8220;two thumbs up&#8221;), or even <a href="http://www.couchcms.com/docs/tutorials/portfolio-site/">a tutorial on how to use it</a> - rather, the purpose of this post is to explain my plan to use Couch with Git.</p>
+<h3>Separation of data and logic</h3>
+<p>Since getting into Git I&#8217;ve discovered lots of really useful ways to make my life easier. For example, after following an article on how to <span class="removed_link" title="http://davidwinter.me/articles/2012/04/09/install-and-manage-wordpress-with-git/">Install and manage WordPress with Git</span>, all the WordPress sites that I maintain on a daily basis are version controlled with the minimum of fuss, making it easy for me to update them as and when I need to.</p>
+<p>This is achieved via the use of a submodule containing the core WordPress files (and nothing site specific), while the rest of the repository contained the bits specific to the site being built. This is very similar to the concept of the separation of  data and logic.</p>
+<p>I wanted the same with Couch, but the default install has at least two folders (<code>uploads</code>, <code>snippets</code>) and one file (<code>config.php</code>) that exist within the main couch folder.</p>
+<p>I <a href="http://www.couchcms.com/forum/viewtopic.php?f=3&amp;t=7012">made a post in the forum about this</a>, and found that <a href="http://www.couchcms.com/forum/viewtopic.php?p=9125#p9125">the aforementioned folders are easily moved</a>, but without a <code>config.php</code> file in the correct place, Couch would just refuse to work. Although it looks as though the guy who wrote Couch might implement a fix for this himself at some point in the future, I&#8217;m impatient, so I made my own solution.</p>
+<h3>What I did</h3>
+<p>The solution, when you think about it, is really simple. First I made a copy of the default <code>config.example.php</code> file, renamed it <code>config.php</code>, then moved it into the root directory folder before customising its settings (while not forgetting to <a href="http://www.couchcms.com/forum/viewtopic.php?p=9125#p9125">set the values for the <code>uploads</code> and <code>snippets</code> folders</a>), then created a new <code>config.php</code> file in the <code>couch</code> folder with the following content:</p>
+<pre class="brush: php; title: ; notranslate">&lt;?php
+$folder = dirname(dirname(__FILE__));
+require $folder.'/config.php';</pre>
+<p>As you can see, this gets the path to the root folder (because relative paths don&#8217;t work), then uses it to require the <code>config.php</code> file that has all your settings in it.</p>
+<p>Now that the couch folder is standalone, you&#8217;re free to do whatever you want with it, such as set it up as a submodule, or simply ignore it from your Git repository.</p>
+<p>I&#8217;ve tested this with Couch 1.2.5 and 1.3-RC1, and so far as I can see, it works fine with both (although I can&#8217;t see any reason why it shouldn&#8217;t work with any version of Couch, past or future).</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a><br />For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/04/css-crush/' rel='bookmark' title='CSS Crush'>CSS Crush</a><br />Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much......</li>
+<li><a href='http://limeblast.co.uk/2012/04/deploying-a-git-repository-via-ftp/' rel='bookmark' title='Deploying a Git repository via FTP'>Deploying a Git repository via FTP</a><br />As any regular reader of this blog will know&#8230; *watches as tumble-weed bounces across the void* &#8230;one of the main reasons I got a dedicated server was because of Git, and all the wonderful things that it is able to do for......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/07/how-to-use-couch-cms-with-git/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>WordPress Theme &#8211; Responsive</title>
+		<link>http://limeblast.co.uk/2012/06/wordpress-theme-responsive/</link>
+		<comments>http://limeblast.co.uk/2012/06/wordpress-theme-responsive/#comments</comments>
+		<pubDate>Thu, 07 Jun 2012 16:04:57 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Credit where credit is due]]></category>
+		<category><![CDATA[Fight Club Monkey]]></category>
+		<category><![CDATA[Responsive Web Design]]></category>
+		<category><![CDATA[Roots Theme]]></category>
+		<category><![CDATA[Twitter Bootstrap]]></category>
+		<category><![CDATA[Wordpress]]></category>
+		<category><![CDATA[_s]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=482</guid>
+		<description><![CDATA[As some of you may know, I&#8217;m a keen gamer. I have been for most of my life &#8211; certainly for as long as I&#8217;ve had access to a PC at any rate &#8211; and I was pretty much hooked for...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a>After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/04/css-crush/' rel='bookmark' title='CSS Crush'>CSS Crush</a>Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>As some of you may know, <span class="removed_link" title="http://limeblast.co.uk/2012/02/currently-playing/">I&#8217;m a keen gamer</span>. I have been for most of my life &#8211; certainly for as long as I&#8217;ve had access to a PC at any rate &#8211; and I was pretty much hooked for life once I got a <abbr title="Super Nintendo Entertainment System">SNES</abbr> (Zelda 4EVA).</p>
+<p>What you may not know is that I&#8217;m also the co-founder of a gaming clan/guild called <strong>Fight Club Monkey</strong>.</p>
+<a name="fight-club-monkey"></a><h2>Fight Club Monkey?</h2>
+<p>What started as a semi-serious attempt at competing in an Urban Terror gaming league with some friends, resulted in us all realising that we&#8217;re were not actually very good at the game, and that we had far more fun messing about than trying to win.</p>
+<p>(Most of our clan nights ended with the in-game gravity on the server being turned down, allowing us to pretend as if we were shooting terrorists on the moon.)</p>
+<p>Although the clan lasted for a couple of years, and we ventured into new games as they were released, eventually it become less and less important as we grew up, got jobs and/or went to university.</p>
+<p>Since late last year, however, <abbr title="Fight Club Monkey">FCM</abbr> has made a return, not as a clan or guild per se, but rather as a group of friends who like to get together to play games once in a while.</p>
+<a name="getting-to-the-point"></a><h2>Getting to the point</h2>
+<p><img class="alignright size-medium wp-image-493" title="Responsive Theme" src="http://limeblast.co.uk/wp-content/uploads/2012/06/responsive-theme2-500x500-300x300.png" alt="" width="300" height="300" />I mention all of this simply as a preface to the announcement that on Friday I relaunched <a href="http://fightclubmonkey.co.uk/">the Fight Club Monkey website</a> based on a fantastic WordPress theme called <a href="http://themeid.com/responsive-theme/">Responsive</a> by <a href="http://themeid.com/">ThemeID</a>.</p>
+<p>I&#8217;m often quite fussy about the themes I use in my WordPress projects &#8211; most of the time I prefer to build a theme using something like <a href="http://www.rootstheme.com/">Roots Theme</a> (although, not so much now <a href="https://github.com/retlehs/roots/commit/3c3b71fac02f117632c3e446b1d43248dfe814f3">it&#8217;s gone Bootstrap exclusive</a>) or the newly discovered <a href="https://github.com/Automattic/_s">_s base theme</a>.</p>
+<p>On this occasion, however, I had limited time to work on the project, so was more interested in finding something that worked out the box, which I could then expand using child themes. Being responsive was never crucial to the project, but would have been a nice perk.</p>
+<p>During my research I came across themes such as <span class="removed_link" title="http://hybridside.llow.it/wordpress/">Hybridside</span> and <span class="removed_link" title="http://renova.llow.it/wordpress/">Revova</span>, both of which I think were attractive options, but Responsive blew them both out of the water with its functionality.</p>
+<a name="what-makes-it-good-then"></a><h2>What makes it good then?</h2>
+<h3>Responsive theme</h3>
+<p>We&#8217;re moving into an age where more and more people are using mobile and tablet devices to access the web, and any sites that don&#8217;t keep up with the changing face of technology will get left behind.</p>
+<p>There are some features that don&#8217;t work quite as well <em>responsivly</em> as I would like (such as the very top and very bottom navigation bars being far too small on phones), but these issues should fixable with a few <abbr title="Cascading Style Sheets">CSS</abbr> tweaks.</p>
+<h3>Child theme support</h3>
+<p>Unlike some free themes I&#8217;ve used in the past, the development and improvement of Responsive seems quite active (just a day after launching the site I saw there was a theme update waiting for me), so by having <span class="removed_link" title="http://themeid.com/forum/topic/505/child-theme-example/">good child theme support</span>, you&#8217;re free to go in and make your own customisations and enhancements, while retaining the ability to easily upgrade to the latest release.</p>
+<h3>Theme options</h3>
+<p>Baked into the theme are a number of settings which can be controlled within the WordPress administration area. These include being able to set-up links to popular social networking sites (such as Twitter, Facebook and even Pinterest &amp; Instagram), adding your Google/Bing/Yahoo webmaster verification strings, as well as whatever statical tracking code you use, and an area for a small amount of custom CSS.</p>
+<p>Also impressive is the easy way in which you can customise the elements which exist on the homepage, with the main call to action area being controlled via its own interface, and the three areas below that being widgetized (is that even a word?) allowing you to put in whatever widgets you want.</p>
+<p>The theme also supports ten page templates, allowing you quite a lot of flexibility in how you want to display your content of your site.</p>
+<a name="conclusion"></a><h2>Conclusion</h2>
+<p>All in all, I&#8217;m very impressed by the Responsive theme. It has ticked all the boxes I needed for the FCM site, and am looking forward to using its child theme support to enhance it further. <a href="http://themeid.com/responsive-theme/">Visit the Responsive theme website</a>.</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a><br />For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a><br />After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/04/css-crush/' rel='bookmark' title='CSS Crush'>CSS Crush</a><br />Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/06/wordpress-theme-responsive/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>CSS Crush</title>
+		<link>http://limeblast.co.uk/2012/04/css-crush/</link>
+		<comments>http://limeblast.co.uk/2012/04/css-crush/#comments</comments>
+		<pubDate>Thu, 05 Apr 2012 14:00:57 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Credit where credit is due]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[CSS Crush]]></category>
+		<category><![CDATA[LESS]]></category>
+		<category><![CDATA[limeBase]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[SASS]]></category>
+		<category><![CDATA[webkit]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=312</guid>
+		<description><![CDATA[Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/03/facebook-timeline-photoshop-template/' rel='bookmark' title='Facebook Timeline Photoshop Template'>Facebook Timeline Photoshop Template</a>Seeing as Facebook&#8217;s Timeline feature is making the move to Pages, I figured that now was a good time to share the Facebook Timeline Hack Template that I used to style up my Timeline Page. The download includes a Photoshop......</li>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a>I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>Although there is a lot of love for CSS preprocessors such as <a href="http://lesscss.org/">LESS</a> and <a href="http://sass-lang.com/">SASS</a>, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based <a href="http://the-echoplex.net/csscrush/">CSS Crush</a>.</p>
+<p>Much like the other CSS preprocessors, CSS Crush offers a range of features designed to make your life easier. Although these including functions that let you do things like manipulate the opacity of a colour value, or generate a data uri from a relative file path, I&#8217;m going to talk about some of the other features that I have experience with.</p>
+<a name="vendor-prefixing"></a><h2>Vendor prefixing</h2>
+<p>The first, and possibly most important of these, is vendor prefixing. There has been a lot of talk in recent months about <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">non-webkit browsers adopting the -webkit prefix</a>, which has been spurred on by the fact that, to be honest, vendor prefixes are a pain in the arse.</p>
+<p>CSS Crush helps solve issues like this by automatically adding all relevant prefixes to the properties that support them, meaning that this:</p>
+<pre class="brush: css; title: ; notranslate">div { background: #fff linear-gradient( left, red, white ) no-repeat; }</pre>
+<p>will automatically be converted into this:</p>
+<pre class="brush: css; title: ; notranslate">div {
+    background: #fff -webkit-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -moz-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -ms-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -o-linear-gradient( left, red, white ) no-repeat;
+    background: #fff linear-gradient( left, red, white ) no-repeat;
+}</pre>
+<p>This is something that (so far as I&#8217;m aware) none of the other CSS preprocessors offer out of the box &#8211; although some creative use of mixins does offer something similar &#8211; but by using CSS Crush as a <a href="https://github.com/peteboere/css-crush">git submodule</a>, you&#8217;ll always have access to the latest prefixes available.</p>
+<a name="variables"></a><h2>Variables</h2>
+<p>Another helpful feature is that of being able to define and use variables. This allows for uniformity across all your stylesheets, meaning you can define variables such as:</p>
+<pre class="brush: css; title: ; notranslate">@define
+{
+	/* fonts */
+	title: &quot;Times New Roman&quot;, Georgia, serif;
+	body: Verdana, Arial, Helvetica, sans-serif;
+
+	/* colours */
+	primary-rgb: 89,168,15;
+	primary: rgb($(primary-rgb));
+	primary-text: #FFFFFF;
+
+	secondary-rgb: 158,213,76;
+	secondary: rgb($(secondary-rgb));
+	secondary-text: #FFFFFF;
+
+	background-rgb: 240,242,221;
+	background: rgb($(background-rgb));
+	background-text: #222222;
+}</pre>
+<p>then if you need to change a value at a later date, rather than having to do a find/replace, and risk missing some, you simply update the value is one place, and CSS Crush does the rest for you.</p>
+<a name="direct-import-and-minification"></a><h2>Direct @import and minification</h2>
+<p>One of the things I found particularly useful was the ability to use <code>@import</code> to manage different CSS files for responsive sites. A practical example of this would be something like:</p>
+<pre class="brush: css; title: ; notranslate">@import url( &quot;mobile.css&quot; ); /* Mobile first */
+@import url( &quot;tablet.css&quot; ) screen and (min-width: 768px); /* Tablet and higher */
+@import url( &quot;desktop.css&quot; ) screen and (min-width: 992px); /* desktop and higher */</pre>
+<p>which not only imports the files directly into a single stylesheet, would also put the correct <code>@media</code> tags around the imported code, and then performs minification on it all.</p>
+<a name="implementing-css-crush-in-wordpress"></a><h2>Implementing CSS Crush in WordPress</h2>
+<p>I&#8217;m actually using CSS Crush in my <span class="removed_link" title="https://github.com/LimeBlast/limeBase">limeBase WordPress starter theme</span>, so that could be a good way for you to get started, but if you wanted to create your own implementation, it couldn&#8217;t be simpler:</p>
+<ol>
+<li>Download/clone the files into your theme folder in a folder called <code>cssCrush</code></li>
+<li>in your functions.php file, add the following line
+<pre class="brush: php; title: ; notranslate">require_once 'cssCrush/CssCrush.php';</pre>
+</li>
+<li>in your header.php, replace your existing stylesheet <code>&lt;link&gt;</code>code with
+<pre class="brush: php; title: ; notranslate">&lt;?php echo CssCrush::tag( TEMPLATEPATH.DIRECTORY_SEPARATOR.'style.css' ); ?&gt;</pre>
+</li>
+</ol>
+<p>Upon viewing your page, CSS Crush will create two new files: .csscrush and style.crush.css, and output the relevant <code>&lt;link&gt;</code> code linking to the new style.crush.css file.</p>
+<p>If, before further page views, the original style.css gets updated, CSS Crush will detect the change, and generate a new crushed file for you, otherwise it will continue to serve the cached file.</p>
+<a name="conclusion"></a><h2>Conclusion</h2>
+<p>If you&#8217;re already happily using LESS or SASS, then I&#8217;m not sure there is much that CSS Crush can offer you. If, however, you&#8217;re more interested in a simple way of automatically adding vendor prefixes and performing minification on your CSS, then you can&#8217;t go far wrong with CSS Crush.</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/03/facebook-timeline-photoshop-template/' rel='bookmark' title='Facebook Timeline Photoshop Template'>Facebook Timeline Photoshop Template</a><br />Seeing as Facebook&#8217;s Timeline feature is making the move to Pages, I figured that now was a good time to share the Facebook Timeline Hack Template that I used to style up my Timeline Page. The download includes a Photoshop......</li>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a><br />For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a><br />I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/04/css-crush/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Images in responsive WordPress Web sites</title>
+		<link>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/</link>
+		<comments>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/#comments</comments>
+		<pubDate>Tue, 28 Feb 2012 13:35:35 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Share the knowledge]]></category>
+		<category><![CDATA[@media Queries]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[figcaption]]></category>
+		<category><![CDATA[figure]]></category>
+		<category><![CDATA[Images]]></category>
+		<category><![CDATA[Mobile First]]></category>
+		<category><![CDATA[Responsive Web Design]]></category>
+		<category><![CDATA[TinyMCE]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=183</guid>
+		<description><![CDATA[For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a>After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a>This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a>I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty.</p>
+<p>As I want to use this blog as a means for sharing knowledge and information that other developers might find useful, allow me to present my first such post, designed to solve the problem with how to display images within WordPress posts and pages on responsive Web sites.</p>
+<a name="what-is-a-responsive-web-site"></a><h2>What is a responsive Web site?</h2>
+<p>For anyone unfamiliar with thm, responsive Web sites are sites that adapt and change their layout to fit the size of the device they&#8217;re viewed on.</p>
+<p>This site, for example, is a responsive Web site, and employs responsive techniques which enables it to switch between three different layouts:</p>
+<ul>
+<li>Desktop &#8211; which has two main columns.</li>
+<li>Tablet &#8211; where the right column drops below the main content, and the width of the site drops.</li>
+<li>Mobile &#8211; everything is in a single column which spans the entire width of the device.</li>
+</ul>
+<p>If you&#8217;re using a desktop computer, try resizing your browser and you&#8217;ll see the site switch between the three layouts as the window gets smaller.</p>
+<p>As I&#8217;m sure you can imagine, due to the fact this requires designing and building multiple layouts, building a responsive site is hard work, especially once you come up against the issue of trying to display the same content on an ever decreasing screen size.</p>
+<a name="responsive-images"></a><h2>Responsive images</h2>
+<p>Anyway&#8230; One issue that I encountered while building this site was that of images embedded into posts and pages.</p>
+<p>I had already designed both the desktop and tablet layouts to have the same width content area, meaning I can use the alignment options offered by WordPress, and know exactly how they&#8217;re going to look on two of my three layouts.</p>
+<p>But what about the mobile layout? This is a bit more difficult to handle as the width of the device is variable. There had to be a simple way of handing this issue?</p>
+<a name="requirements"></a><h2>Requirements</h2>
+<p>The first thing I wanted was to remove any left or right alignments of images in the mobile layout, and instead force them onto their own line with a centre alignment. This is because on a screen that is potentially no more than 480 pixels wide, the last thing you want is a 300 pixel image sat to the right of the content you&#8217;re trying to read.</p>
+<p>I also wanted to make sure that the images on the mobile layout are displayed at an intelligent size. For example, images that are smaller than the width of the browser should display at their native resolution, but images larger than the width of the browser should resize down to fit.</p>
+<p>Finally, I needs to use <a href="http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu">Mobile First</a> techniques to make the site as accessible as possible.</p>
+<a name="solution"></a><h2>Solution</h2>
+<p>Below is the code that I&#8217;ve produced to solve these issues. It is based on the required <a href="http://codex.wordpress.org/CSS#WordPress_Generated_Classes">WordPress Generated Classes CSS</a>, but modifies it to allow for the behaviour described in the requirements above.</p>
+<p>I&#8217;ve tested it as much as I can, and so far as I can tell, it works exactly as intended, but if you can find any problems with it, or can offer any suggestions on how to improve it, please <a href="#respond">let me know</a>.</p>
+<pre class="brush: css; title: ; notranslate">/* ===================================
+   WordPress Images
+   =================================== */
+
+/*
+ * Mobile First
+ */
+a img.aligncenter
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption,
+figure
+{
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%;
+    text-align: center;
+    padding: 5px 5px 10px;
+}
+
+.wp-caption p.wp-caption-text,
+figcaption
+{
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 10px 4px 0;
+}
+
+img.alignright,
+img.alignleft,
+img.aligncenter
+{
+    float: none;
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+    display: block;
+}
+.wp-caption img,
+.wp-caption.alignright img,
+.wp-caption.alignleft img,
+.wp-caption.aligncenter img,
+figure img,
+figure.alignright img,
+figure.alignleft img,
+figure.aligncenter img
+{
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+.wp-caption.alignright,
+.wp-caption.alignleft,
+.wp-caption.aligncenter,
+figure.alignright,
+figure.alignleft,
+figure.aligncenter
+{
+    float: none;
+    max-width: 100% !important;
+    height: auto;
+    margin: 0 auto;
+}
+
+/*
+ * Tablet and up
+*/
+
+@media only screen and (min-width: 768px) {
+
+    .wp-caption.alignright,
+    figure.alignright
+    {
+        margin: 5px 0 20px 20px;
+    }
+
+    .wp-caption img,
+    figure img
+    {
+        border: 0 none;
+        height: auto;
+        max-width: 98.5%;
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    .aligncenter,
+    div.aligncenter,
+    .aligncenter,
+	figure.aligncenter
+    {
+        display: block;
+        margin: 5px auto;
+    }
+
+    .alignright,
+    a img.alignright
+    {
+        float: right !important;
+        margin: 5px 0 17px 17px !important;
+    }
+
+    .alignleft,
+    a img.alignleft
+    {
+        float: left !important;
+        margin: 5px 17px 17px 0 !important;
+    }
+
+}</pre>
+<a name="figures"></a><h2>Figures</h2>
+<p>You may have noticed the above code featured the new HTML5 <code>figure</code> and <code>figcaption</code> tags. Although WordPress doesn&#8217;t automatically support the <code>figure</code> tag, it is possible to have WordPress use figure in place of its own caption solution by adding the following to your theme&#8217;s functions.php file (which was adapted from <a href="http://wp.smashingmagazine.com/2011/02/22/using-html5-to-transform-wordpress-twentyten-theme/">code in this article</a>):</p>
+<pre class="brush: php; title: ; notranslate">add_shortcode('wp_caption', 'twentyten_img_caption_shortcode');
+add_shortcode('caption', 'twentyten_img_caption_shortcode');
+
+function twentyten_img_caption_shortcode($attr, $content = null)
+{
+	$options = array(
+		'id' =&gt; '',
+		'align' =&gt; 'alignnone',
+		'width' =&gt; '',
+		'caption' =&gt; ''
+	);
+
+	extract(shortcode_atts($options, $attr));
+
+	if (1 &gt; (int) $width || empty($caption))
+	{
+		return $content;
+	}
+
+	if ($id)
+	{
+		$idtag = 'id=&quot;' . esc_attr($id) . '&quot; ';
+	}
+
+	return '&lt;figure ' . $idtag . 'aria-describedby=&quot;figcaption_' . $id . '&quot; style=&quot;width: ' . (10 + (int) $width) . 'px&quot; class=&quot;'.$align.'&quot;&gt;'. do_shortcode($content) . '&lt;figcaption id=&quot;figcaption_' . $id . '&quot;&gt;' . $caption . '&lt;/figcaption&gt;&lt;/figure&gt;';
+}</pre>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a><br />After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a><br />This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a><br />I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Scrap it and start again</title>
+		<link>http://limeblast.co.uk/2012/02/scrap-it-and-start-again/</link>
+		<comments>http://limeblast.co.uk/2012/02/scrap-it-and-start-again/#comments</comments>
+		<pubDate>Mon, 20 Feb 2012 11:22:40 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[News]]></category>
+		<category><![CDATA[CSS3]]></category>
+		<category><![CDATA[Ghost Design]]></category>
+		<category><![CDATA[HTML5]]></category>
+		<category><![CDATA[HTML5 Boilerplate]]></category>
+		<category><![CDATA[limeBase]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=125</guid>
+		<description><![CDATA[After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a>I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a>I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a>This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the homepage, and the site was ready to go live.</p>
+<p>But what&#8217;s the fun in that? So rather than do the sensible thing, and just upload the site, <strong>I instead chose to start fresh and build the site all over again from scratch</strong>.</p>
+<p>Why? Well, there are a couple of reasons.</p>
+<p>The first is that I had spent a good portion of the last week updating the <span class="removed_link" title="https://github.com/LimeBlast/limeBase">limeBase theme</span> on which the Lime Blast site was based. These updates included the latest versions of HTML5 Boilerplate, improved CSS structuring, improved media query responsiveness, and quite a lot of tweaks to the WordPress specific functionality.</p>
+<p>The second is that the majority of time spend building the initial site was experimentation to see what was possible. I&#8217;m still new to WordPress, and while I&#8217;m much better at building for it than I was four months ago, I know I&#8217;ve still got a lot to learn. I&#8217;m also starting to understand HTML5 and CSS3 much better than I did before, but the downside of this was the labrynth of HTML and CSS that I had left behind. Pretty much the same thing happened with the Ghost Design site.</p>
+<p>The way I see it, this site is my most important showcase &#8211; if I can&#8217;t show the world how good I am on my own site, then how good am I going to be working on someone else&#8217;s site?</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a><br />I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a><br />I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a><br />This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/02/scrap-it-and-start-again/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching 40/84 queries in 0.053 seconds using disk
+Object Caching 1393/1394 objects using disk
+
+ Served from: limeblast.co.uk @ 2015-10-14 15:28:17 by W3 Total Cache -->

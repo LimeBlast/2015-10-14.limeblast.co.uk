@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Lime Blast &#187; LESS</title>
+	<atom:link href="http://limeblast.co.uk/tag/less/feed/" rel="self" type="application/rss+xml" />
+	<link>http://limeblast.co.uk</link>
+	<description>The virtual home of Web developer Daniel Hollands, the place to be if you&#039;re looking for articles and tutorials (and rants) on all aspects of the World Wide Web.</description>
+	<lastBuildDate>Wed, 14 Oct 2015 13:13:21 +0000</lastBuildDate>
+	<language>en-US</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.9</generator>
+	<item>
+		<title>CSS Crush</title>
+		<link>http://limeblast.co.uk/2012/04/css-crush/</link>
+		<comments>http://limeblast.co.uk/2012/04/css-crush/#comments</comments>
+		<pubDate>Thu, 05 Apr 2012 14:00:57 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Credit where credit is due]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[CSS Crush]]></category>
+		<category><![CDATA[LESS]]></category>
+		<category><![CDATA[limeBase]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[SASS]]></category>
+		<category><![CDATA[webkit]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=312</guid>
+		<description><![CDATA[Although there is a lot of love for CSS preprocessors such as LESS and SASS, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based CSS Crush. Much...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/03/facebook-timeline-photoshop-template/' rel='bookmark' title='Facebook Timeline Photoshop Template'>Facebook Timeline Photoshop Template</a>Seeing as Facebook&#8217;s Timeline feature is making the move to Pages, I figured that now was a good time to share the Facebook Timeline Hack Template that I used to style up my Timeline Page. The download includes a Photoshop......</li>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a>I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>Although there is a lot of love for CSS preprocessors such as <a href="http://lesscss.org/">LESS</a> and <a href="http://sass-lang.com/">SASS</a>, both of which seem to work very well, I wanted to take a moment to talk about a slightly different alternative, the PHP-based <a href="http://the-echoplex.net/csscrush/">CSS Crush</a>.</p>
+<p>Much like the other CSS preprocessors, CSS Crush offers a range of features designed to make your life easier. Although these including functions that let you do things like manipulate the opacity of a colour value, or generate a data uri from a relative file path, I&#8217;m going to talk about some of the other features that I have experience with.</p>
+<a name="vendor-prefixing"></a><h2>Vendor prefixing</h2>
+<p>The first, and possibly most important of these, is vendor prefixing. There has been a lot of talk in recent months about <a href="http://remysharp.com/2012/02/09/vendor-prefixes-about-to-go-south/">non-webkit browsers adopting the -webkit prefix</a>, which has been spurred on by the fact that, to be honest, vendor prefixes are a pain in the arse.</p>
+<p>CSS Crush helps solve issues like this by automatically adding all relevant prefixes to the properties that support them, meaning that this:</p>
+<pre class="brush: css; title: ; notranslate">div { background: #fff linear-gradient( left, red, white ) no-repeat; }</pre>
+<p>will automatically be converted into this:</p>
+<pre class="brush: css; title: ; notranslate">div {
+    background: #fff -webkit-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -moz-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -ms-linear-gradient( left, red, white ) no-repeat;
+    background: #fff -o-linear-gradient( left, red, white ) no-repeat;
+    background: #fff linear-gradient( left, red, white ) no-repeat;
+}</pre>
+<p>This is something that (so far as I&#8217;m aware) none of the other CSS preprocessors offer out of the box &#8211; although some creative use of mixins does offer something similar &#8211; but by using CSS Crush as a <a href="https://github.com/peteboere/css-crush">git submodule</a>, you&#8217;ll always have access to the latest prefixes available.</p>
+<a name="variables"></a><h2>Variables</h2>
+<p>Another helpful feature is that of being able to define and use variables. This allows for uniformity across all your stylesheets, meaning you can define variables such as:</p>
+<pre class="brush: css; title: ; notranslate">@define
+{
+	/* fonts */
+	title: &quot;Times New Roman&quot;, Georgia, serif;
+	body: Verdana, Arial, Helvetica, sans-serif;
+
+	/* colours */
+	primary-rgb: 89,168,15;
+	primary: rgb($(primary-rgb));
+	primary-text: #FFFFFF;
+
+	secondary-rgb: 158,213,76;
+	secondary: rgb($(secondary-rgb));
+	secondary-text: #FFFFFF;
+
+	background-rgb: 240,242,221;
+	background: rgb($(background-rgb));
+	background-text: #222222;
+}</pre>
+<p>then if you need to change a value at a later date, rather than having to do a find/replace, and risk missing some, you simply update the value is one place, and CSS Crush does the rest for you.</p>
+<a name="direct-import-and-minification"></a><h2>Direct @import and minification</h2>
+<p>One of the things I found particularly useful was the ability to use <code>@import</code> to manage different CSS files for responsive sites. A practical example of this would be something like:</p>
+<pre class="brush: css; title: ; notranslate">@import url( &quot;mobile.css&quot; ); /* Mobile first */
+@import url( &quot;tablet.css&quot; ) screen and (min-width: 768px); /* Tablet and higher */
+@import url( &quot;desktop.css&quot; ) screen and (min-width: 992px); /* desktop and higher */</pre>
+<p>which not only imports the files directly into a single stylesheet, would also put the correct <code>@media</code> tags around the imported code, and then performs minification on it all.</p>
+<a name="implementing-css-crush-in-wordpress"></a><h2>Implementing CSS Crush in WordPress</h2>
+<p>I&#8217;m actually using CSS Crush in my <span class="removed_link" title="https://github.com/LimeBlast/limeBase">limeBase WordPress starter theme</span>, so that could be a good way for you to get started, but if you wanted to create your own implementation, it couldn&#8217;t be simpler:</p>
+<ol>
+<li>Download/clone the files into your theme folder in a folder called <code>cssCrush</code></li>
+<li>in your functions.php file, add the following line
+<pre class="brush: php; title: ; notranslate">require_once 'cssCrush/CssCrush.php';</pre>
+</li>
+<li>in your header.php, replace your existing stylesheet <code>&lt;link&gt;</code>code with
+<pre class="brush: php; title: ; notranslate">&lt;?php echo CssCrush::tag( TEMPLATEPATH.DIRECTORY_SEPARATOR.'style.css' ); ?&gt;</pre>
+</li>
+</ol>
+<p>Upon viewing your page, CSS Crush will create two new files: .csscrush and style.crush.css, and output the relevant <code>&lt;link&gt;</code> code linking to the new style.crush.css file.</p>
+<p>If, before further page views, the original style.css gets updated, CSS Crush will detect the change, and generate a new crushed file for you, otherwise it will continue to serve the cached file.</p>
+<a name="conclusion"></a><h2>Conclusion</h2>
+<p>If you&#8217;re already happily using LESS or SASS, then I&#8217;m not sure there is much that CSS Crush can offer you. If, however, you&#8217;re more interested in a simple way of automatically adding vendor prefixes and performing minification on your CSS, then you can&#8217;t go far wrong with CSS Crush.</p>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/03/facebook-timeline-photoshop-template/' rel='bookmark' title='Facebook Timeline Photoshop Template'>Facebook Timeline Photoshop Template</a><br />Seeing as Facebook&#8217;s Timeline feature is making the move to Pages, I figured that now was a good time to share the Facebook Timeline Hack Template that I used to style up my Timeline Page. The download includes a Photoshop......</li>
+<li><a href='http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/' rel='bookmark' title='Images in responsive WordPress Web sites'>Images in responsive WordPress Web sites</a><br />For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as......</li>
+<li><a href='http://limeblast.co.uk/2012/02/running-a-server-is-hard-work/' rel='bookmark' title='Running a server is hard work'>Running a server is hard work</a><br />I was hoping, when I first had the idea for this post, that it would be a run-through of all the steps I has taken in setting up my dedicated server. It was going to include links to the resources......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/04/css-crush/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching 8/20 queries in 0.012 seconds using disk
+Object Caching 522/523 objects using disk
+
+ Served from: limeblast.co.uk @ 2015-10-14 15:38:09 by W3 Total Cache -->

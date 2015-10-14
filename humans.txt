@@ -1,0 +1,39 @@
+/* TEAM */
+
+Developer:		Daniel Hollands.
+Site:			http://danielhollands.co.uk/.
+Twitter:		@limeblast.
+Location:		Leamington Spa, Warwickshire.
+
+	[...]
+
+
+/* THANKS */
+
+Name:			Nick La
+Twitter:		@nickla
+Why:			For his article on responsive navigation
+URL:			http://webdesignerwall.com/tutorials/css-responsive-navigation-menu
+
+Name:			Tom Kenny
+Twitter:		@tkenny
+Why:			For his slick CSS3 Buttons
+URL:			http://webdesignerwall.com/tutorials/css-responsive-navigation-menu
+
+Name:			Web2Feel
+Why:			For the Yasmin theme being the basis of my initial layout
+URL:			http://www.web2feel.com/yasmin/
+
+Name:			Terry Burrows
+Twitter:		@ghostds
+Why:			For his input on the site's design
+
+Name:			Ian Maull
+Why:			For his input on the site's design
+
+
+/* SITE */
+
+Standards:		HTML5, CSS3.
+Components:		normalize, Modernizr, jQuery, Susy, Sassy Buttons, Google Analytics on Steroids, WordPress.
+Software:		Compass, Netbeans, Firefox, Firebug, FireSASS.

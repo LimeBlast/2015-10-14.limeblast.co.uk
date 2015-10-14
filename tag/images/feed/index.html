@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Lime Blast &#187; Images</title>
+	<atom:link href="http://limeblast.co.uk/tag/images/feed/" rel="self" type="application/rss+xml" />
+	<link>http://limeblast.co.uk</link>
+	<description>The virtual home of Web developer Daniel Hollands, the place to be if you&#039;re looking for articles and tutorials (and rants) on all aspects of the World Wide Web.</description>
+	<lastBuildDate>Wed, 14 Oct 2015 13:13:21 +0000</lastBuildDate>
+	<language>en-US</language>
+		<sy:updatePeriod>hourly</sy:updatePeriod>
+		<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>http://wordpress.org/?v=3.9</generator>
+	<item>
+		<title>Images in responsive WordPress Web sites</title>
+		<link>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/</link>
+		<comments>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/#comments</comments>
+		<pubDate>Tue, 28 Feb 2012 13:35:35 +0000</pubDate>
+		<dc:creator><![CDATA[Daniel]]></dc:creator>
+				<category><![CDATA[Share the knowledge]]></category>
+		<category><![CDATA[@media Queries]]></category>
+		<category><![CDATA[CSS]]></category>
+		<category><![CDATA[figcaption]]></category>
+		<category><![CDATA[figure]]></category>
+		<category><![CDATA[Images]]></category>
+		<category><![CDATA[Mobile First]]></category>
+		<category><![CDATA[Responsive Web Design]]></category>
+		<category><![CDATA[TinyMCE]]></category>
+		<category><![CDATA[Wordpress]]></category>
+
+		<guid isPermaLink="false">http://limeblast.co.uk/?p=183</guid>
+		<description><![CDATA[For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty. As I want to use this blog as...<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a>After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a>This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a>I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+</ol>
+</div>
+]]></description>
+				<content:encoded><![CDATA[<p>For the past couple of weeks I&#8217;ve been learning how to build responsive Web sites, a process that is simple in principle, but complex in practice once you get down to the nitty-gritty.</p>
+<p>As I want to use this blog as a means for sharing knowledge and information that other developers might find useful, allow me to present my first such post, designed to solve the problem with how to display images within WordPress posts and pages on responsive Web sites.</p>
+<a name="what-is-a-responsive-web-site"></a><h2>What is a responsive Web site?</h2>
+<p>For anyone unfamiliar with thm, responsive Web sites are sites that adapt and change their layout to fit the size of the device they&#8217;re viewed on.</p>
+<p>This site, for example, is a responsive Web site, and employs responsive techniques which enables it to switch between three different layouts:</p>
+<ul>
+<li>Desktop &#8211; which has two main columns.</li>
+<li>Tablet &#8211; where the right column drops below the main content, and the width of the site drops.</li>
+<li>Mobile &#8211; everything is in a single column which spans the entire width of the device.</li>
+</ul>
+<p>If you&#8217;re using a desktop computer, try resizing your browser and you&#8217;ll see the site switch between the three layouts as the window gets smaller.</p>
+<p>As I&#8217;m sure you can imagine, due to the fact this requires designing and building multiple layouts, building a responsive site is hard work, especially once you come up against the issue of trying to display the same content on an ever decreasing screen size.</p>
+<a name="responsive-images"></a><h2>Responsive images</h2>
+<p>Anyway&#8230; One issue that I encountered while building this site was that of images embedded into posts and pages.</p>
+<p>I had already designed both the desktop and tablet layouts to have the same width content area, meaning I can use the alignment options offered by WordPress, and know exactly how they&#8217;re going to look on two of my three layouts.</p>
+<p>But what about the mobile layout? This is a bit more difficult to handle as the width of the device is variable. There had to be a simple way of handing this issue?</p>
+<a name="requirements"></a><h2>Requirements</h2>
+<p>The first thing I wanted was to remove any left or right alignments of images in the mobile layout, and instead force them onto their own line with a centre alignment. This is because on a screen that is potentially no more than 480 pixels wide, the last thing you want is a 300 pixel image sat to the right of the content you&#8217;re trying to read.</p>
+<p>I also wanted to make sure that the images on the mobile layout are displayed at an intelligent size. For example, images that are smaller than the width of the browser should display at their native resolution, but images larger than the width of the browser should resize down to fit.</p>
+<p>Finally, I needs to use <a href="http://www.slideshare.net/bryanrieger/rethinking-the-mobile-web-by-yiibu">Mobile First</a> techniques to make the site as accessible as possible.</p>
+<a name="solution"></a><h2>Solution</h2>
+<p>Below is the code that I&#8217;ve produced to solve these issues. It is based on the required <a href="http://codex.wordpress.org/CSS#WordPress_Generated_Classes">WordPress Generated Classes CSS</a>, but modifies it to allow for the behaviour described in the requirements above.</p>
+<p>I&#8217;ve tested it as much as I can, and so far as I can tell, it works exactly as intended, but if you can find any problems with it, or can offer any suggestions on how to improve it, please <a href="#respond">let me know</a>.</p>
+<pre class="brush: css; title: ; notranslate">/* ===================================
+   WordPress Images
+   =================================== */
+
+/*
+ * Mobile First
+ */
+a img.aligncenter
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wp-caption,
+figure
+{
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%;
+    text-align: center;
+    padding: 5px 5px 10px;
+}
+
+.wp-caption p.wp-caption-text,
+figcaption
+{
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 10px 4px 0;
+}
+
+img.alignright,
+img.alignleft,
+img.aligncenter
+{
+    float: none;
+    max-width: 100%;
+    height: auto;
+    margin: 1em auto;
+    display: block;
+}
+.wp-caption img,
+.wp-caption.alignright img,
+.wp-caption.alignleft img,
+.wp-caption.aligncenter img,
+figure img,
+figure.alignright img,
+figure.alignleft img,
+figure.aligncenter img
+{
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+.wp-caption.alignright,
+.wp-caption.alignleft,
+.wp-caption.aligncenter,
+figure.alignright,
+figure.alignleft,
+figure.aligncenter
+{
+    float: none;
+    max-width: 100% !important;
+    height: auto;
+    margin: 0 auto;
+}
+
+/*
+ * Tablet and up
+*/
+
+@media only screen and (min-width: 768px) {
+
+    .wp-caption.alignright,
+    figure.alignright
+    {
+        margin: 5px 0 20px 20px;
+    }
+
+    .wp-caption img,
+    figure img
+    {
+        border: 0 none;
+        height: auto;
+        max-width: 98.5%;
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+
+    .aligncenter,
+    div.aligncenter,
+    .aligncenter,
+	figure.aligncenter
+    {
+        display: block;
+        margin: 5px auto;
+    }
+
+    .alignright,
+    a img.alignright
+    {
+        float: right !important;
+        margin: 5px 0 17px 17px !important;
+    }
+
+    .alignleft,
+    a img.alignleft
+    {
+        float: left !important;
+        margin: 5px 17px 17px 0 !important;
+    }
+
+}</pre>
+<a name="figures"></a><h2>Figures</h2>
+<p>You may have noticed the above code featured the new HTML5 <code>figure</code> and <code>figcaption</code> tags. Although WordPress doesn&#8217;t automatically support the <code>figure</code> tag, it is possible to have WordPress use figure in place of its own caption solution by adding the following to your theme&#8217;s functions.php file (which was adapted from <a href="http://wp.smashingmagazine.com/2011/02/22/using-html5-to-transform-wordpress-twentyten-theme/">code in this article</a>):</p>
+<pre class="brush: php; title: ; notranslate">add_shortcode('wp_caption', 'twentyten_img_caption_shortcode');
+add_shortcode('caption', 'twentyten_img_caption_shortcode');
+
+function twentyten_img_caption_shortcode($attr, $content = null)
+{
+	$options = array(
+		'id' =&gt; '',
+		'align' =&gt; 'alignnone',
+		'width' =&gt; '',
+		'caption' =&gt; ''
+	);
+
+	extract(shortcode_atts($options, $attr));
+
+	if (1 &gt; (int) $width || empty($caption))
+	{
+		return $content;
+	}
+
+	if ($id)
+	{
+		$idtag = 'id=&quot;' . esc_attr($id) . '&quot; ';
+	}
+
+	return '&lt;figure ' . $idtag . 'aria-describedby=&quot;figcaption_' . $id . '&quot; style=&quot;width: ' . (10 + (int) $width) . 'px&quot; class=&quot;'.$align.'&quot;&gt;'. do_shortcode($content) . '&lt;figcaption id=&quot;figcaption_' . $id . '&quot;&gt;' . $caption . '&lt;/figcaption&gt;&lt;/figure&gt;';
+}</pre>
+<div class='yarpp-related-rss'>
+<h2>Related posts:</h2><ol>
+<li><a href='http://limeblast.co.uk/2012/02/scrap-it-and-start-again/' rel='bookmark' title='Scrap it and start again'>Scrap it and start again</a><br />After spending almost all of my spare time during the last four weeks working on designing and building the Lime Blast site, I had gotten to a point on Saturday morning where all I had to do was fix the......</li>
+<li><a href='http://limeblast.co.uk/2012/02/i-love-you-jose-diaz-gonzalez/' rel='bookmark' title='I love you Jose Diaz-Gonzalez'>I love you Jose Diaz-Gonzalez</a><br />This is a very quick post to thank Jose Diaz-Gonzalez for the Upload behaviour he wrote for CakePHP. I needed a way of uploading multiple images in the admin area of the Chameleon Photography site. During my Cake 1.3 days,......</li>
+<li><a href='http://limeblast.co.uk/2012/01/rotten-to-the-core/' rel='bookmark' title='Rotten to the Core'>Rotten to the Core</a><br />I don&#8217;t know if there is a term for what I am &#8211; Applephobic maybe &#8211; but I hate Apple. I&#8217;m about as PC as PC can get (and I&#8217;m not talking about being Politically Correct). In my opinion, the......</li>
+</ol>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>http://limeblast.co.uk/2012/02/images-in-responsive-wordpress-web-sites/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using disk: enhanced
+Database Caching 8/20 queries in 0.154 seconds using disk
+Object Caching 528/529 objects using disk
+
+ Served from: limeblast.co.uk @ 2015-10-14 15:38:21 by W3 Total Cache -->
